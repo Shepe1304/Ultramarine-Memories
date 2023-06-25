@@ -141,7 +141,7 @@ const Controls = () => {
   var CLyric = document.querySelector("#clyric");
   var LLyric = document.querySelector("#llyric");
   var volumebar = document.querySelector(".volume");
-  var lastVolume;
+  let defaultVolume = 50;
 
   var fLyric = "",
     cLyric = "",
@@ -149,44 +149,74 @@ const Controls = () => {
 
   const [playPause, setPlayPause] = useState("play");
   const [volumeState, setVolumeState] = useState("high");
+  const [showVolume, setShowVolume] = useState(false);
 
   useEffect(() => {
     if (!progbar) progbar = document.querySelector(".progbar");
     progbar.value = 0;
-    if (!volumebar) volumebar = document.querySelector(".volume");
-    volumebar.value = 80;
-    lastVolume = volumebar.value;
+    // if (!volumebar) volumebar = document.querySelector(".volume");
+    // volumebar.value = 80;
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isPlaying) {
+        progbar.value = song.currentTime;
+
+        let currentTimestampId = 0;
+        for (let i = lyrics.length - 2; i >= 1; i--) {
+          if (song.currentTime >= lyrics[i].timestamp) {
+            currentTimestampId = i;
+            break;
+          }
+        }
+
+        fLyric = lyrics[currentTimestampId - 1].content;
+        cLyric = lyrics[currentTimestampId].content;
+        lLyric = lyrics[currentTimestampId + 1].content;
+
+        if (!FLyric) FLyric = document.querySelector("#flyric");
+        FLyric.textContent = fLyric;
+        if (!CLyric) CLyric = document.querySelector("#clyric");
+        CLyric.textContent = cLyric;
+        if (!LLyric) LLyric = document.querySelector("#llyric");
+        LLyric.textContent = lLyric;
+      }
+    }, 100);
+    return () => clearInterval(timer);
   }, []);
 
-  const timer = setInterval(() => {
-    if (isPlaying) {
-      progbar.value = song.currentTime;
+  // const timer = setInterval(() => {
+  //   if (isPlaying) {
+  //     progbar.value = song.currentTime;
 
-      let currentTimestampId = 0;
-      for (let i = lyrics.length - 2; i >= 1; i--) {
-        if (song.currentTime >= lyrics[i].timestamp) {
-          currentTimestampId = i;
-          break;
-        }
-      }
+  //     let currentTimestampId = 0;
+  //     for (let i = lyrics.length - 2; i >= 1; i--) {
+  //       if (song.currentTime >= lyrics[i].timestamp) {
+  //         currentTimestampId = i;
+  //         break;
+  //       }
+  //     }
 
-      fLyric = lyrics[currentTimestampId - 1].content;
-      cLyric = lyrics[currentTimestampId].content;
-      lLyric = lyrics[currentTimestampId + 1].content;
+  //     fLyric = lyrics[currentTimestampId - 1].content;
+  //     cLyric = lyrics[currentTimestampId].content;
+  //     lLyric = lyrics[currentTimestampId + 1].content;
 
-      if (!FLyric) FLyric = document.querySelector("#flyric");
-      FLyric.textContent = fLyric;
-      if (!CLyric) CLyric = document.querySelector("#clyric");
-      CLyric.textContent = cLyric;
-      if (!LLyric) LLyric = document.querySelector("#llyric");
-      LLyric.textContent = lLyric;
-    }
-  }, 500);
+  //     if (!FLyric) FLyric = document.querySelector("#flyric");
+  //     FLyric.textContent = fLyric;
+  //     if (!CLyric) CLyric = document.querySelector("#clyric");
+  //     CLyric.textContent = cLyric;
+  //     if (!LLyric) LLyric = document.querySelector("#llyric");
+  //     LLyric.textContent = lLyric;
+  //   }
+  // }, 500);
 
   const updateProgress = () => {
     if (!song) song = document.querySelector(".song");
+    if (!progbar) progbar = document.querySelector(".progbar");
     if (!isPlaying) {
       song.play();
+      setShowVolume(true);
       isPlaying = true;
     }
     song.currentTime = progbar.value;
@@ -200,6 +230,7 @@ const Controls = () => {
       //play
       setPlayPause("pause");
       song.play();
+      setShowVolume(true);
       isPlaying = true;
     } else if (playPause === "pause") {
       //pause
@@ -210,24 +241,18 @@ const Controls = () => {
   };
 
   const Backward = () => {
-    if (!isPlaying) {
-      alert("The song is not played yet. Please play the song first <3");
-    }
-    else song.currentTime -= 10;
+    if (song) song.currentTime -= 10;
   };
 
   const Forward = () => {
-    if (!isPlaying) {
-      alert("The song is not played yet. Please play the song first <3");
-    }
-    else song.currentTime += 10;
+    if (song) song.currentTime += 10;
   };
 
   const updateVolume = () => {
     if (!song) song = document.querySelector(".song");
     if (!volumebar) volumebar = document.querySelector(".volume");
     song.volume = volumebar.value / 100;
-    if (volumebar.value == 0) {
+    if (volumebar.value === "0") {
       setVolumeState("off");
     } else if (volumebar.value < 50) {
       setVolumeState("low");
@@ -238,14 +263,13 @@ const Controls = () => {
 
   const Mute = () => {
     if (volumeState === "off") {
-      volumebar.value = lastVolume;
+      volumebar.value = defaultVolume;
       if (volumebar.value < 50) {
         setVolumeState("low");
       } else {
         setVolumeState("high");
       }
     } else {
-      lastVolume = volumebar.value;
       volumebar.value = 0;
       setVolumeState("off");
     }
@@ -270,7 +294,7 @@ const Controls = () => {
         </div>
       </div>
       <div className="song-player">
-        <audio className="song" src={songSrc}></audio>
+        <audio className="song" src={songSrc} autoPlay="muted"></audio>
         <div className="big-container">
           <div className="progbar-container">
             <input
@@ -291,7 +315,8 @@ const Controls = () => {
               <i className="fa-solid fa-forward"></i>
             </div>
           </div>
-          <div className="volume-bigcontainer">
+          {showVolume ? (
+            <div className="volume-bigcontainer">
             <div className="volume-container">
               <i
                 className={`fa-solid fa-volume-${volumeState}`}
@@ -307,6 +332,10 @@ const Controls = () => {
               />
             </div>
           </div>
+          ) : (
+            null
+          )}
+          
         </div>
       </div>
     </>
