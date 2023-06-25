@@ -1,0 +1,41 @@
+.lyrics-container {
+  width: 40vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+  font-size: 23px;
+  margin-top: -10vh;
+}
+
+.lyric {
+  max-width: 30vw;
+}
+
+.prev-lyric, .next-lyric {
+  color: #8985c7;
+  position: relative;
+}
+
+.current-lyric {
+  color: white;
+}
+
+.lyric-cover-prev {
+  box-shadow: 0 0.75rem 10px rgba(12, 28, 61, 0.9) inset;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.lyric-cover-next {
+  box-shadow: 0 -0.75rem 10px rgba(12, 28, 61, 0.9) inset;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

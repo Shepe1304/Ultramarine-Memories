@@ -1,0 +1,22 @@
+body {
+  background-color: rgb(12, 28, 61);
+}
+
+.img-container, .img {
+  height: 100vh;
+}
+
+.img-container {
+  box-shadow: -40px 0 30px 10px rgb(12, 28, 61) inset;
+  /* box-shadow: inset -10px 5px 100px rgba(0,0,0,1); */
+  z-index: 1;
+  width: 60vw;
+}
+
+.img {
+  position: absolute;
+  z-index: -1;
+  margin-top: -2vh;
+  object-fit: cover;
+  width: 58vw;
+}

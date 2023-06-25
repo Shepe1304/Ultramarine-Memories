@@ -1,0 +1,22 @@
+.name-bar {
+  background: linear-gradient(#120a8f, #2a229a, #5954b1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5vh;
+  position: relative;
+  z-index: 200;
+  width: 100%;
+}
+
+.song-name {
+  font-weight: bold;
+  font-size: 30px;
+  color: #e7e7f4;
+}
+
+.artist-name {
+  font-size: 20px;
+  color: #dcdcef;
+}

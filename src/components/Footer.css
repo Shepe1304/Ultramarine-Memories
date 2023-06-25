@@ -1,0 +1,21 @@
+.footer {
+  /* background: linear-gradient(#5954b1, #2a229a, #120a8f); */
+  background-color: rgb(91, 91, 91);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6vh 0;
+  position: absolute;
+  bottom: 0;
+  z-index: 200;
+  width: 100%;
+  color: #dcdcef;
+  font-size: 1.2rem;
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+}
+
+.footer span {
+  color: #e7e7f4;
+  font-weight: bold;
+  padding: 0 1.5vw;
+}
