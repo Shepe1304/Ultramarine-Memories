@@ -142,6 +142,7 @@ const Controls = () => {
   var LLyric = document.querySelector("#llyric");
   var volumebar = document.querySelector(".volume");
   let defaultVolume = 50;
+  const [lastVolume, setLastVolume] = useState(0)
 
   var fLyric = "",
     cLyric = "",
@@ -263,16 +264,21 @@ const Controls = () => {
 
   const Mute = () => {
     if (volumeState === "off") {
-      volumebar.value = defaultVolume;
+      if (!volumebar) volumebar = document.querySelector(".volume");
+      // volumebar.value = defaultVolume;
+      volumebar.value = lastVolume;
       if (volumebar.value < 50) {
         setVolumeState("low");
       } else {
         setVolumeState("high");
       }
     } else {
+      if (!volumebar) volumebar = document.querySelector(".volume");
+      setLastVolume(volumebar.value)
       volumebar.value = 0;
       setVolumeState("off");
     }
+    updateVolume();
   };
 
   return (
