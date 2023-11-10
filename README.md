@@ -13,3 +13,5 @@ Enjoy!
   + June 25, 2023:
       After some testing on different phones, I have discovered that due the 'adjust volume' feature encounters some errors on iPhone and does not work. I will try to fix this problem later on.
       On laptops and Androids, the volume adjustment feature seems to work fine.
+  + November 10, 2023:
+      I have fixed a bug about this music player's muting and unmuting on laptop / pc.
