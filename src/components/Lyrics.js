@@ -141,14 +141,15 @@ const Lyrics = ({ currentTime }) => {
   var FLyric = document.querySelector("#flyric");
   var CLyric = document.querySelector("#clyric");
   var LLyric = document.querySelector("#llyric");
-  // useEffect(() => {
-  //   if (!FLyric) FLyric = document.querySelector("#flyric");
-  //   // FLyric.forceUpdate();
-  //   if (!CLyric) CLyric = document.querySelector("#clyric");
-  //   // CLyric.forceUpdate();
-  //   if (!LLyric) LLyric = document.querySelector("#llyric");
-  //   // LLyric.forceUpdate();
-  // }, [change]);
+  
+  useEffect(() => {
+    if (!FLyric) FLyric = document.querySelector("#flyric");
+    // FLyric.forceUpdate();
+    if (!CLyric) CLyric = document.querySelector("#clyric");
+    // CLyric.forceUpdate();
+    if (!LLyric) LLyric = document.querySelector("#llyric");
+    // LLyric.forceUpdate();
+  }, [change]);
 
   var fLyric = "",
     cLyric = "",
