@@ -1,20 +1,42 @@
-# Ultramarine-Memories
-A Music Player built with **React JS**. 
+# 🎵 Ultramarine-Memories
 
-# Website
-https://ultramarine-memories.netlify.app
+A sleek music player application built with **React JS** that offers a seamless listening experience with synchronized lyrics.
 
-**HOW TO USE:**
-  1. You can see synced lyrics and song progress on screen.
-  2. Adjust the volume, forward or backward the song, and pause / play it anytime.
+## 🌐 Live Demo
 
-The song on the website is named **Ultramarine Memories**, composed by **Akedo Kikai**.
-  
-Enjoy!
+Experience the application here: [Ultramarine-Memories](https://ultramarine-memories.netlify.app)
 
-**WEBSITE AUTHOR'S NOTES:**
-  + June 25, 2023:
-      After some testing on different phones, I have discovered that due the 'adjust volume' feature encounters some errors on iPhone and does not work. I will try to fix this problem later on.
-      On laptops and Androids, the volume adjustment feature seems to work fine.
-  + November 10, 2023:
-      I have fixed a bug about this music player's muting and unmuting on laptop / pc.
+## ✨ Features
+
+- **Real-time synchronized lyrics** - Follow along with the song as it plays
+- **Intuitive playback controls** - Play, pause, skip forward/backward
+- **Volume adjustment** - Customize your listening experience
+- **Progress tracking** - Visual representation of the song's timeline
+
+## 🎧 Music
+
+The featured track is **"Ultramarine Memories"** composed by **Akedo Kikai**.
+
+## 📱 How to Use
+
+1. Visit the website to automatically start playing the featured track
+2. Watch as lyrics synchronize with the music in real-time
+3. Use the on-screen controls to:
+   - Play or pause the track
+   - Adjust volume
+   - Skip forward or backward
+
+## 📝 Release Notes
+
+### November 10, 2023
+- Fixed muting/unmuting functionality on desktop and laptop devices
+
+### June 25, 2023
+- Known issue: Volume adjustment feature is not compatible with iPhones
+- Volume controls function correctly on Android devices and computers
+
+---
+
+## 🚀 Enjoy the Music!
+
+Thank you for checking out Ultramarine-Memories. Feel free to provide feedback or report any issues you encounter.
